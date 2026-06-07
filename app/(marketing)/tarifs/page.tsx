@@ -160,6 +160,14 @@ export default function PricingPage() {
                                             <span>Frais de transaction retrait 5%</span>
                                         </li>
                                         <li className="flex items-start gap-2.5">
+                                            <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />
+                                            <span>Statistiques de base</span>
+                                        </li>
+                                        <li className="flex items-start gap-2.5">
+                                            <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />
+                                            <span>Sous-domaine offert</span>
+                                        </li>
+                                        <li className="flex items-start gap-2.5">
                                             <X className="w-4 h-4 text-slate-300 shrink-0 mt-0.5" />
                                             <span className="line-through">Intégration WhatsApp</span>
                                         </li>
@@ -177,7 +185,7 @@ export default function PricingPage() {
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <X className="w-4 h-4 text-slate-300 shrink-0 mt-0.5" />
-                                            <span className="line-through"> Outils analytique</span>
+                                            <span className="line-through"> Création de code promo</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -221,6 +229,14 @@ export default function PricingPage() {
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />
+                                            <span>Statistiques avancé</span>
+                                        </li>
+                                        <li className="flex items-start gap-2.5">
+                                            <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />
+                                            <span>Sous-domaine offert</span>
+                                        </li>
+                                        <li className="flex items-start gap-2.5">
+                                            <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />
                                             <span>Intégration WhatsApp</span>
                                         </li>
                                         <li className="flex items-start gap-2.5">
@@ -237,7 +253,7 @@ export default function PricingPage() {
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />
-                                            <span>Outils analytique</span>
+                                            <span>Création de code promo</span>
                                         </li>
                                     </ul>
                                 </div>

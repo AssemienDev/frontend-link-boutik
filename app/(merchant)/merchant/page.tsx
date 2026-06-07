@@ -9,6 +9,7 @@ import {
     ShoppingBag,
     Store,
     TrendingUp,
+    Check,
     ChevronRight
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
@@ -36,7 +37,7 @@ interface DashboardStats {
 
 export default function MerchantHomePage() {
     const router = useRouter();
-    const { merchant, isAuthenticated} = useMerchantAuthStore();
+    const { merchant, shop, isAuthenticated} = useMerchantAuthStore();
     const [mounted, setMounted] = useState(false);
 
     // État pour les données du dashboard
@@ -45,6 +46,36 @@ export default function MerchantHomePage() {
     const [loadingStats, setLoadingStats] = useState(true);
 
     const [loading, setLoading] = useState(true);
+
+    const [copied, setCopied] = useState(false);
+
+    const handleCopyShopLink = async () => {
+        if (!shop) return;
+
+        const hostname = window.location.hostname;
+        const protocol = window.location.protocol;
+        const port = window.location.port ? `:${window.location.port}` : "";
+
+        // Construction de l'URL de la boutique dynamique selon l'environnement (Local vs Prod)
+        let shopUrl = "";
+        if (hostname.includes("localhost") || hostname.includes("127.0.0.1")) {
+            shopUrl = `${protocol}//${shop.slug}.localhost${port}`;
+        } else {
+            const mainDomain = hostname.replace("marchand.", "");
+            shopUrl = `${protocol}//${shop.slug}.${mainDomain}`;
+        }
+
+        try {
+            // Écriture dans le presse-papiers natif de l'appareil
+            await navigator.clipboard.writeText(shopUrl);
+            setCopied(true);
+
+            // Rétablir l'état d'origine du bouton après 2 secondes
+            setTimeout(() => setCopied(false), 2000);
+        } catch (err) {
+            console.error("Échec de la copie du lien de la boutique:", err);
+        }
+    };
 
 
     useEffect(() => {
@@ -116,8 +147,25 @@ export default function MerchantHomePage() {
                     <Link href="/catalog/new" className="flex-1 md:flex-none px-5 py-3 rounded-xl bg-primary text-white font-extrabold text-xs hover:opacity-95 transition flex items-center justify-center gap-2 shadow-md shadow-primary/10 cursor-pointer">
                         <Plus className="w-4 h-4" /> Ajouter un produit
                     </Link>
-                    <button className="flex-1 md:flex-none px-5 py-3 rounded-xl bg-tertiary text-white font-extrabold text-xs hover:opacity-95 transition flex items-center justify-center gap-2 shadow-md shadow-tertiary/10 cursor-pointer">
-                        <ShoppingBag className="w-4 h-4" /> Partager lien WhatsApp
+                    {/* BOUTON COPIER LE LIEN DE BOUTIQUE DYNAMIQUE (DASHBOARD) */}
+                    <button
+                        onClick={handleCopyShopLink}
+                        type="button"
+                        className={`flex-1 md:flex-none px-5 py-3 rounded-xl font-extrabold text-xs transition flex items-center justify-center gap-2 shadow-md cursor-pointer ${
+                            copied
+                                ? "bg-emerald-600 text-white shadow-emerald-900/10"
+                                : "bg-tertiary text-white shadow-tertiary/10 hover:opacity-95"
+                        }`}
+                    >
+                        {copied ? (
+                            <>
+                                <Check className="w-4 h-4 animate-scaleIn" /> Lien copié !
+                            </>
+                        ) : (
+                            <>
+                                <ShoppingBag className="w-4 h-4" /> Partager lien WhatsApp
+                            </>
+                        )}
                     </button>
                 </div>
             </div>

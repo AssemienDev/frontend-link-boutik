@@ -1,40 +1,35 @@
-// app/merchant/catalog/new/page.tsx
+// src/app/merchant/catalog/edit/[id]/page.tsx
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useRef } from "react";
+import { useRouter, useParams } from "next/navigation";
 import { apiFetch } from "@/lib/api";
-import { ArrowLeft, Upload, Trash2, Tag, Box, DollarSign, PenTool, Image as ImageIcon } from "lucide-react";
+import { ArrowLeft, Upload, Trash2, Tag, Box, DollarSign, Layers, Image as ImageIcon } from "lucide-react";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 
-//Purifier les rendus dom pour éviter les injections XSS
-import DOMPurify from "isomorphic-dompurify";
-
+// Chargement asynchrone sécurisé de l'éditeur WYSIWYG
+const ReactQuill = dynamic(() => import("react-quill-new"), {
+    ssr: false,
+    loading: () => <div className="h-40 bg-slate-50 border border-slate-200 rounded-2xl animate-pulse" />,
+});
+import "react-quill-new/dist/quill.snow.css";
 
 interface Category {
     id: string;
     name: string;
 }
 
-// Chargement asynchrone sécurisé de l'éditeur (évite les bugs SSR de Next.js)
-const ReactQuill = dynamic(() => import("react-quill-new"), {
-    ssr: false,
-    loading: () => <div className="h-40 bg-slate-50 border border-slate-200 rounded-2xl animate-pulse" />,
-});
-
-import "react-quill-new/dist/quill.snow.css"; // Styles thématiques officiels de Quill
-
-export default function NewProductPage() {
+export default function EditProductPage() {
     const router = useRouter();
+    const { id } = useParams() as { id: string };
 
     const [categories, setCategories] = useState<Category[]>([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-
-
-    // État du formulaire produit complet
+    // État du formulaire produit
     const [form, setForm] = useState({
         name: "",
         category_id: "",
@@ -44,58 +39,111 @@ export default function NewProductPage() {
         sku: "",
         stock_quantity: 0,
         is_featured: false,
-        status: "ACTIVE", // ACTIVE ou DRAFT
+        status: "ACTIVE",
         images: [] as string[],
         has_variants: false,
     });
 
-    // États pour les variantes dynamiques
-    const [taillesInput, setTaillesInput] = useState(""); // S, M, L
-    const [couleursInput, setCouleursInput] = useState(""); // Rouge, Noir
-    const [variantRows, setVariantRows] = useState<any[]>([]); // Matrice croisée
+    // États pour les variantes
+    const [taillesInput, setTaillesInput] = useState("");
+    const [couleursInput, setCouleursInput] = useState("");
+    const [variantRows, setVariantRows] = useState<any[]>([]);
 
+    const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
+
+    // 1. CHARGEMENT DES DONNÉES DU PRODUIT ET CATÉGORIES
     useEffect(() => {
-        // Charger les catégories de la boutique
-        apiFetch<Category[]>("/merchant/categories")
-            .then(setCategories)
-            .catch(() => {});
-    }, []);
+        if (!id) return;
 
-    // Générer automatiquement les combinaisons de variantes croisées
+        Promise.all([
+            apiFetch<any>(`/merchant/products/${id}`),
+            apiFetch<Category[]>("/merchant/categories")
+        ])
+            .then(([prodData, catsData]) => {
+                setCategories(catsData);
+
+                // Pré-remplir le formulaire
+                setForm({
+                    name: prodData.name,
+                    category_id: prodData.category_id || "",
+                    description: prodData.description || "",
+                    price: prodData.price,
+                    compare_at_price: prodData.compare_at_price ? String(prodData.compare_at_price) : "",
+                    sku: prodData.sku || "",
+                    stock_quantity: prodData.stock_quantity,
+                    is_featured: prodData.is_featured,
+                    status: prodData.status,
+                    images: prodData.images || [],
+                    has_variants: prodData.has_variants,
+                });
+
+                if (prodData.has_variants) {
+                    setTaillesInput(prodData.variants_taille?.join(", ") || "");
+                    setCouleursInput(prodData.variants_couleur?.join(", ") || "");
+                    setVariantRows(prodData.variants_stock || []);
+                }
+
+                setLoading(false);
+            })
+            .catch((err) => {
+                setError(err.message || "Impossible de charger les données du produit.");
+                setLoading(false);
+            });
+    }, [id]);
+
+    // 2. GÉNÉRATEUR DE VARIANTES CROISÉES DYNAMIQUES
     useEffect(() => {
         if (!form.has_variants) return;
 
-        const tailles = taillesInput.split(",").map(t => t.trim()).filter(t => t !== "");
-        const couleurs = couleursInput.split(",").map(c => c.trim()).filter(c => c !== "");
+        const tailles = taillesInput.split(",").map(t => t.trim()).filter(Boolean);
+        const couleurs = couleursInput.split(",").map(c => c.trim()).filter(Boolean);
 
         if (tailles.length === 0 && couleurs.length === 0) {
-            setVariantRows([]);
             return;
         }
 
         const combinations: any[] = [];
 
-        // Algorithme de produit cartésien pour croiser Tailles & Couleurs
         if (tailles.length > 0 && couleurs.length > 0) {
             tailles.forEach(t => {
                 couleurs.forEach(c => {
-                    combinations.push({ taille: t, couleur: c, stock: 0, sku: `${form.sku ? form.sku + '-' : ''}${t}-${c}`.toUpperCase() });
+                    // Chercher si cette combinaison existait déjà pour préserver son stock et son SKU
+                    const existing = variantRows.find(r => r.taille === t && r.couleur === c);
+                    combinations.push({
+                        taille: t,
+                        couleur: c,
+                        stock: existing ? existing.stock : 0,
+                        sku: existing ? existing.sku : `${form.sku ? form.sku + '-' : ''}${t}-${c}`.toUpperCase()
+                    });
                 });
             });
         } else if (tailles.length > 0) {
             tailles.forEach(t => {
-                combinations.push({ taille: t, couleur: null, stock: 0, sku: `${form.sku ? form.sku + '-' : ''}${t}`.toUpperCase() });
+                const existing = variantRows.find(r => r.taille === t);
+                combinations.push({
+                    taille: t,
+                    couleur: null,
+                    stock: existing ? existing.stock : 0,
+                    sku: existing ? existing.sku : `${form.sku ? form.sku + '-' : ''}${t}`.toUpperCase()
+                });
             });
         } else {
             couleurs.forEach(c => {
-                combinations.push({ taille: null, couleur: c, stock: 0, sku: `${form.sku ? form.sku + '-' : ''}${c}`.toUpperCase() });
+                const existing = variantRows.find(r => r.couleur === c);
+                combinations.push({
+                    taille: null,
+                    couleur: c,
+                    stock: existing ? existing.stock : 0,
+                    sku: existing ? existing.sku : `${form.sku ? form.sku + '-' : ''}${c}`.toUpperCase()
+                });
             });
         }
 
         setVariantRows(combinations);
-    }, [taillesInput, couleursInput, form.has_variants, form.sku]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [taillesInput, couleursInput, form.has_variants]);
 
-    // Gère l'upload d'images vers R2 (Max 5Mo, max 5 images)
+    // Upload d'image R2
     const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (!files || files.length === 0) return;
@@ -105,15 +153,14 @@ export default function NewProductPage() {
             return;
         }
 
-        setError(null);
         const file = files[0];
-
-        if (file.size > 4 * 1024 * 1024) {
-            setError("Le fichier est trop volumineux. La taille maximale d'une photo est de 4 Mo.");
+        if (file.size > 5 * 1024 * 1024) {
+            setError("Le fichier est trop volumineux (Max 5 Mo).");
             return;
         }
 
-        setLoading(true);
+        setError(null);
+        setSaving(true);
 
         try {
             const formData = new FormData();
@@ -126,9 +173,9 @@ export default function NewProductPage() {
 
             setForm({ ...form, images: [...form.images, res.url] });
         } catch (err: any) {
-            setError(err.message || "Échec de l'envoi de l'image.");
+            setError(err.message || "Échec du chargement de l'image.");
         } finally {
-            setLoading(false);
+            setSaving(false);
         }
     };
 
@@ -148,23 +195,22 @@ export default function NewProductPage() {
         setVariantRows(updated);
     };
 
-    const handlePublish = async (e: React.FormEvent) => {
+    // Traiter la sauvegarde de modification
+    const handleSaveChanges = async (e: React.FormEvent) => {
         e.preventDefault();
-        setLoading(true);
+        setSaving(true);
         setError(null);
 
-        // Calculer le stock global cumulatif si variantes
         const totalStock = form.has_variants
             ? variantRows.reduce((acc, r) => acc + r.stock, 0)
             : form.stock_quantity;
 
-        // Nettoyer les listes de variantes pour l'envoi
         const taillesList = form.has_variants ? taillesInput.split(",").map(t => t.trim()).filter(Boolean) : null;
         const couleursList = form.has_variants ? couleursInput.split(",").map(c => c.trim()).filter(Boolean) : null;
 
         try {
-            await apiFetch("/merchant/products", {
-                method: "POST",
+            await apiFetch(`/merchant/products/${id}`, {
+                method: "PUT",
                 body: JSON.stringify({
                     ...form,
                     compare_at_price: form.compare_at_price ? parseFloat(form.compare_at_price) : null,
@@ -175,44 +221,54 @@ export default function NewProductPage() {
                 }),
             });
 
-            router.push("/catalog");
+            router.push("/merchant/catalog");
         } catch (err: any) {
-            setError(err.message || "Une erreur est survenue lors de la publication de votre produit.");
+            setError(err.message || "Une erreur est survenue lors de l'enregistrement du produit.");
         } finally {
-            setLoading(false);
+            setSaving(false);
         }
     };
 
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-slate-50">
+                <div className="text-center">
+                    <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+                    <p className="text-slate-400 text-xs font-semibold">Chargement des données du produit...</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="bg-[#F8FAFC] min-h-screen pb-24">
-            {/* HEADER DE RECOUVREMENT */}
+            {/* HEADER COULISSANT */}
             <div className="bg-white border-b border-slate-200/60 sticky top-0 z-40">
                 <div className="max-w-3xl mx-auto h-16 px-6 flex items-center justify-between">
                     <Link href="/merchant/catalog" className="flex items-center gap-2 text-xs font-bold text-slate-500 hover:text-slate-800 transition">
                         <ArrowLeft className="w-4 h-4" /> Retour au catalogue
                     </Link>
-                    <span className="text-sm font-black text-slate-800">Nouveau produit</span>
-                    <div className="w-16 h-10" /> {/* Balancement */}
+                    <span className="text-sm font-black text-slate-800">Modifier le produit</span>
+                    <div className="w-16 h-10" />
                 </div>
             </div>
 
             <main className="max-w-3xl mx-auto px-6 mt-8 space-y-6">
                 {error && <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-xs font-bold text-rose-700">{error}</div>}
 
-                <form onSubmit={handlePublish} className="space-y-6">
+                <form onSubmit={handleSaveChanges} className="space-y-6">
 
-                    {/* SECTION 1 : LES MÉDIAS (MAX 5 IMAGES SUR CLOUDFLARE R2) */}
+                    {/* MÉDIAS (R2 INTEGRATION) */}
                     <div className="p-6 bg-white border border-slate-200/60 rounded-3xl space-y-4">
                         <div className="flex justify-between items-center border-b border-slate-100 pb-3">
                             <span className="text-xs font-black text-slate-700 uppercase tracking-wider">Médias</span>
                             <span className="text-slate-400 text-xs font-bold">{form.images.length}/5</span>
                         </div>
 
-                        {/* Zone de Drag and drop stylisée */}
                         <div className="border-2 border-dashed border-slate-200 hover:border-primary rounded-2xl p-8 text-center transition bg-slate-50/50 relative">
                             <Upload className="w-8 h-8 text-primary mx-auto mb-2" />
                             <p className="text-xs font-bold text-slate-700">Ajouter des photos</p>
-                            <p className="text-[10px] text-slate-400 mt-1 font-semibold">PNG, JPG jusqu&#39;à 4 Mo</p>
+                            <p className="text-[10px] text-slate-400 mt-1 font-semibold">PNG, JPG jusqu'à 5 Mo</p>
                             <input
                                 type="file"
                                 accept="image/*"
@@ -222,13 +278,12 @@ export default function NewProductPage() {
                             />
                         </div>
 
-                        {/* Liste de miniatures des images chargées */}
                         {form.images.length > 0 && (
                             <div className="flex flex-wrap gap-3 pt-2">
                                 {form.images.map((imgUrl, idx) => (
                                     <div key={idx} className="w-16 h-16 rounded-xl border border-slate-150 overflow-hidden relative group">
                                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img src={imgUrl} alt="Aperçu produit" className="absolute inset-0 w-full h-full object-cover" />
+                                        <img src={imgUrl} alt="Vignette" className="absolute inset-0 w-full h-full object-cover" />
                                         <button
                                             type="button"
                                             onClick={() => handleRemoveImage(idx)}
@@ -242,7 +297,7 @@ export default function NewProductPage() {
                         )}
                     </div>
 
-                    {/* SECTION 2 : INFORMATIONS GÉNÉRALES */}
+                    {/* INFORMATIONS GÉNÉRALES */}
                     <div className="p-6 bg-white border border-slate-200/60 rounded-3xl space-y-4">
                         <h3 className="text-xs font-black text-slate-700 uppercase tracking-wider border-b border-slate-100 pb-3">Informations Générales</h3>
 
@@ -262,7 +317,7 @@ export default function NewProductPage() {
                                 <select
                                     required value={form.category_id}
                                     onChange={(e) => setForm({ ...form, category_id: e.target.value })}
-                                    className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-700 focus:outline-none focus:border-primary transition cursor-pointer"
+                                    className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-700 focus:outline-none"
                                 >
                                     <option value="">Sélectionner une catégorie</option>
                                     {categories.map(cat => <option key={cat.id} value={cat.id}>{cat.name}</option>)}
@@ -271,7 +326,7 @@ export default function NewProductPage() {
                         </div>
                     </div>
 
-                    {/* SECTION 3 : TARIFICATION */}
+                    {/* TARIFICATION */}
                     <div className="p-6 bg-white border border-slate-200/60 rounded-3xl space-y-4">
                         <h3 className="text-xs font-black text-slate-700 uppercase tracking-wider border-b border-slate-100 pb-3">Tarification</h3>
 
@@ -282,29 +337,28 @@ export default function NewProductPage() {
                                     type="number" required value={form.price || ""}
                                     onChange={(e) => setForm({ ...form, price: parseFloat(e.target.value) || 0 })}
                                     placeholder="FCFA 0"
-                                    className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 focus:outline-none focus:border-primary transition"
+                                    className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 focus:outline-none"
                                 />
                             </div>
                             <div>
-                                <label className="block text-[10px] font-black uppercase text-slate-500 tracking-wider mb-2">Prix de réduction / Prix barré (Optionnel)</label>
+                                <label className="block text-[10px] font-black uppercase text-slate-500 tracking-wider mb-2">Prix barré (Optionnel)</label>
                                 <input
                                     type="number" value={form.compare_at_price}
                                     onChange={(e) => setForm({ ...form, compare_at_price: e.target.value })}
                                     placeholder="FCFA 0"
-                                    className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 focus:outline-none focus:border-primary transition"
+                                    className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 focus:outline-none"
                                 />
                             </div>
                         </div>
                     </div>
 
-                    {/* SECTION 4 : OPTIONS DE VARIANTES DYNAMIQUES DE MAQUETTE */}
+                    {/* VARIANTES DYNAMIQUES DE STOCK */}
                     <div className="p-6 bg-white border border-slate-200/60 rounded-3xl space-y-4">
                         <div className="flex justify-between items-center border-b border-slate-100 pb-3">
                             <h3 className="text-xs font-black text-slate-700 uppercase tracking-wider">Variantes (Optionnel)</h3>
                             <div className="flex items-center gap-2">
                                 <input
-                                    type="checkbox"
-                                    id="variants-toggle"
+                                    type="checkbox" id="variants-toggle"
                                     checked={form.has_variants}
                                     onChange={(e) => setForm({ ...form, has_variants: e.target.checked })}
                                     className="toggle toggle-primary toggle-sm cursor-pointer"
@@ -321,7 +375,7 @@ export default function NewProductPage() {
                                         <input
                                             type="text" value={taillesInput}
                                             onChange={(e) => setTaillesInput(e.target.value)}
-                                            placeholder="Ex: S, M, L, XL"
+                                            placeholder="Ex: S, M, L"
                                             className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 focus:outline-none"
                                         />
                                     </div>
@@ -330,13 +384,13 @@ export default function NewProductPage() {
                                         <input
                                             type="text" value={couleursInput}
                                             onChange={(e) => setCouleursInput(e.target.value)}
-                                            placeholder="Ex: Bleu, Rouge, Noir"
+                                            placeholder="Ex: Bleu, Rouge"
                                             className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 focus:outline-none"
                                         />
                                     </div>
                                 </div>
 
-                                {/* TABLEAU GÉNERÉ DYNAMIQUE DES VARIANTES & STOCKS DÉTAILLÉS */}
+                                {/* Grille dynamique */}
                                 {variantRows.length > 0 && (
                                     <div className="space-y-3 pt-2">
                                         <span className="text-[10px] font-black uppercase text-slate-400 tracking-wider">Matrice de Stock par combinaison</span>
@@ -377,7 +431,7 @@ export default function NewProductPage() {
                                         type="number" required value={form.stock_quantity || ""}
                                         onChange={(e) => setForm({ ...form, stock_quantity: parseInt(e.target.value) || 0 })}
                                         placeholder="0"
-                                        className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 focus:outline-none focus:border-primary transition"
+                                        className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 focus:outline-none"
                                     />
                                 </div>
                                 <div>
@@ -386,45 +440,29 @@ export default function NewProductPage() {
                                         type="text" value={form.sku}
                                         onChange={(e) => setForm({ ...form, sku: e.target.value })}
                                         placeholder="Ex: WX-2023-A"
-                                        className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 focus:outline-none focus:border-primary transition"
+                                        className="w-full p-3 bg-white border border-slate-200 rounded-xl text-xs md:text-sm text-slate-800 focus:outline-none"
                                     />
                                 </div>
                             </div>
                         )}
                     </div>
 
-                    {/* SECTION 5 : DESCRIPTION EDITABLE AVEC REACT QUILL (EDITEUR ENRICHI WYSIWYG) */}
+                    {/* DESCRIPTION EDITABLE */}
                     <div className="p-6 bg-white border border-slate-200/60 rounded-3xl space-y-4">
-                        <h3 className="text-xs font-black text-slate-700 uppercase tracking-wider border-b border-slate-100 pb-3">
-                            Détails du produit
-                        </h3>
-
-                        <div className="space-y-2">
-                            <label className="block text-[10px] font-black uppercase text-slate-500 tracking-wider">
-                                Description détaillée
-                            </label>
-
-                            <div className="quill-editor-wrapper">
-                                <ReactQuill
-                                    theme="snow"
-                                    value={form.description}
-                                    // Met à jour l'HTML de la description dans l'état réactif
-                                    onChange={(content) => setForm({ ...form, description: content })}
-                                    placeholder="Décrivez les caractéristiques, avantages et spécifications de votre produit..."
-                                    modules={{
-                                        toolbar: [
-                                            [{ header: [1, 2, false] }],
-                                            ["bold", "italic", "underline", "strike"],
-                                            [{ list: "ordered" }, { list: "bullet" }],
-                                            ["clean"],
-                                        ],
-                                    }}
-                                />
-                            </div>
+                        <h3 className="text-xs font-black text-slate-700 uppercase tracking-wider border-b border-slate-100 pb-3">Détails</h3>
+                        <div>
+                            <label className="block text-[10px] font-black uppercase text-slate-500 tracking-wider mb-2">Description détaillée</label>
+                            <ReactQuill
+                                theme="snow"
+                                value={form.description}
+                                onChange={(content) => setForm({ ...form, description: content })}
+                                placeholder="Décrivez les caractéristiques, avantages et spécifications de votre produit..."
+                                className="bg-white rounded-2xl"
+                            />
                         </div>
                     </div>
 
-                    {/* SECTION 6 : OPTIONS DE PUBLICATION (IS_FEATURED / STATUS) */}
+                    {/* OPTIONS PUBLICATION */}
                     <div className="p-4 bg-white border border-slate-200/60 rounded-3xl flex justify-around gap-4 text-xs font-bold text-slate-500">
                         <div className="flex items-center gap-2">
                             <input
@@ -447,16 +485,16 @@ export default function NewProductPage() {
                         </div>
                     </div>
 
-                    {/* BOUTON DE PUBLICATION GÉNÉRAL */}
+                    {/* BOUTON ENREGISTRER */}
                     <button
                         type="submit"
-                        disabled={loading}
+                        disabled={saving}
                         className="w-full py-4 rounded-xl bg-primary text-white font-extrabold text-xs md:text-sm hover:opacity-95 transition flex items-center justify-center shadow-md disabled:opacity-50 cursor-pointer"
                     >
-                        {loading ? (
+                        {saving ? (
                             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                         ) : (
-                            "Enregistrer le produit"
+                            "Enregistrer les modifications"
                         )}
                     </button>
 

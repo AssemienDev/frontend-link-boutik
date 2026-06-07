@@ -12,7 +12,7 @@ import {
     Settings,
     Bell,
     Menu,
-    LogOut
+    LogOut, ChartBarStacked, BadgePercent, Megaphone
 } from "lucide-react";
 import Link from "next/link";
 import {apiFetch} from "@/lib/api";
@@ -152,7 +152,7 @@ export default function MerchantLayout({
                             </div>
                             <div className="overflow-hidden">
                                 <h3 className="text-xs font-black text-slate-800 truncate">{merchant.full_name || "Commerçant"}</h3>
-                                <span className="inline-block px-2 py-0.5 bg-amber-50 text-[#F59E0B] text-[8px] font-black uppercase rounded-md mt-1 border border-amber-100">
+                                <span className="inline-block px-2 py-0.5 bg-amber-50 text-third text-[8px] font-black uppercase rounded-md mt-1 border border-amber-100">
                               Premium Plan
                             </span>
                             </div>
@@ -164,7 +164,7 @@ export default function MerchantLayout({
                                 href="/"
                                 className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition font-extrabold ${
                                     pathname === "/"
-                                        ? "bg-[#F59E0B] text-white shadow-sm"
+                                        ? "bg-third text-white shadow-sm"
                                         : "hover:bg-slate-50 hover:text-slate-800"
                                 }`}
                             >
@@ -174,37 +174,49 @@ export default function MerchantLayout({
                                 href="/catalog"
                                 className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition ${
                                     pathname.startsWith("/catalog")
-                                        ? "bg-[#F59E0B] text-white shadow-sm"
+                                        ? "bg-third text-white shadow-sm"
                                         : "hover:bg-slate-50 hover:text-slate-800"
                                 }`}
                             >
                                 <Layers className="w-4 h-4 text-slate-400" /> Produits
                             </Link>
                             <Link
-                                href="/analytics"
+                                href="/categories"
                                 className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition ${
-                                    pathname.startsWith("/analytics")
-                                        ? "bg-[#F59E0B] text-white shadow-sm"
+                                    pathname.startsWith("/categories")
+                                        ? "bg-third text-white shadow-sm"
                                         : "hover:bg-slate-50 hover:text-slate-800"
                                 }`}
                             >
-                                <BarChart3 className="w-4 h-4 text-slate-400" /> Sales Analytics
+                                <ChartBarStacked  className="w-4 h-4 text-slate-400" /> Catégories
                             </Link>
                             <Link
-                                href="/support"
+                                href="/promo-code"
                                 className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition ${
-                                    pathname.startsWith("/support")
-                                        ? "bg-[#F59E0B] text-white shadow-sm"
+                                    pathname.startsWith("/promo-code")
+                                        ? "bg-third text-white shadow-sm"
                                         : "hover:bg-slate-50 hover:text-slate-800"
                                 }`}
                             >
-                                <Headphones className="w-4 h-4 text-slate-400" /> Customer Support
+                                <BadgePercent className="w-4 h-4 text-slate-400" /> Code promo
                             </Link>
+                            <Link
+                                href="/marketing-shop"
+                                className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition ${
+                                    pathname.startsWith("/marketing-shop")
+                                        ? "bg-third text-white shadow-sm"
+                                        : "hover:bg-slate-50 hover:text-slate-800"
+                                }`}
+                            >
+                                <Megaphone className="w-4 h-4 text-slate-400" /> Code promo
+                            </Link>
+
+
                             <Link
                                 href="/settings"
                                 className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition ${
                                     pathname.startsWith("/settings")
-                                        ? "bg-[#F59E0B] text-white shadow-sm"
+                                        ? "bg-third text-white shadow-sm"
                                         : "hover:bg-slate-50 hover:text-slate-800"
                                 }`}
                             >
@@ -215,7 +227,7 @@ export default function MerchantLayout({
                     </div>
 
                     <div className="text-[9px] text-slate-400 font-semibold text-center border-t border-slate-100 pt-4">
-                        LinkBoutik • Fait pour l'Afrique
+                        LinkBoutik • Fait pour l&#39;Afrique
                     </div>
                 </aside>
             </div>
