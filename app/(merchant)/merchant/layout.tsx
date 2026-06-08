@@ -12,7 +12,7 @@ import {
     Settings,
     Bell,
     Menu,
-    LogOut, ChartBarStacked, BadgePercent, Megaphone
+    LogOut, ChartBarStacked, BadgePercent, Megaphone, ListOrdered, UserRound, Landmark
 } from "lucide-react";
 import Link from "next/link";
 import {apiFetch} from "@/lib/api";
@@ -209,6 +209,36 @@ export default function MerchantLayout({
                                 }`}
                             >
                                 <Megaphone className="w-4 h-4 text-slate-400" /> Code promo
+                            </Link>
+                            <Link
+                                href="/commandes"
+                                className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition ${
+                                    pathname.startsWith("/commandes")
+                                        ? "bg-third text-white shadow-sm"
+                                        : "hover:bg-slate-50 hover:text-slate-800"
+                                }`}
+                            >
+                                <ListOrdered  className="w-4 h-4 text-slate-400" /> Commandes
+                            </Link>
+                            <Link
+                                href="/clients"
+                                className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition ${
+                                    pathname.startsWith("/clients")
+                                        ? "bg-third text-white shadow-sm"
+                                        : "hover:bg-slate-50 hover:text-slate-800"
+                                }`}
+                            >
+                                <UserRound  className="w-4 h-4 text-slate-400" /> Clients
+                            </Link>
+                            <Link
+                                href="/finances"
+                                className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition ${
+                                    pathname.startsWith("/finances")
+                                        ? "bg-third text-white shadow-sm"
+                                        : "hover:bg-slate-50 hover:text-slate-800"
+                                }`}
+                            >
+                                <Landmark  className="w-4 h-4 text-slate-400" /> Finances
                             </Link>
 
 

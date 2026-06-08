@@ -177,11 +177,11 @@ export default function PricingPage() {
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <X className="w-4 h-4 text-slate-300 shrink-0 mt-0.5" />
-                                            <span className="line-through">Création de commande manuellement</span>
+                                            <span className="line-through">Création de commande personnalisée</span>
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <X className="w-4 h-4 text-slate-300 shrink-0 mt-0.5" />
-                                            <span className="line-through"> Ajout de client manuellement</span>
+                                            <span className="line-through"> Création de fiche client</span>
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <X className="w-4 h-4 text-slate-300 shrink-0 mt-0.5" />
@@ -225,7 +225,7 @@ export default function PricingPage() {
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />
-                                            <span>Frais de transaction retrait réduits(3.5%)</span>
+                                            <span>Frais de transaction retrait réduits(4%)</span>
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />
@@ -245,11 +245,11 @@ export default function PricingPage() {
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />
-                                            <span>Création de commande manuellement</span>
+                                            <span>Création de commande personnalisée</span>
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />
-                                            <span>Ajout de client manuellement</span>
+                                            <span>Création de fiche client</span>
                                         </li>
                                         <li className="flex items-start gap-2.5">
                                             <Check className="w-4 h-4 text-tertiary shrink-0 mt-0.5" />

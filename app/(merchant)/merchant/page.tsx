@@ -201,9 +201,9 @@ export default function MerchantHomePage() {
                             <span className="text-[10px] text-teal-150 font-extrabold uppercase tracking-wider">Commandes en attente</span>
                             <p className="text-4xl font-black">{stats.pending_orders_count}</p>
                         </div>
-                        <button className="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-extrabold text-xs transition flex items-center gap-1.5 border border-white/10 cursor-pointer">
+                        <Link href="/commandes" className="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-extrabold text-xs transition flex items-center gap-1.5 border border-white/10 cursor-pointer">
                             Traiter <ChevronRight className="w-4 h-4" />
-                        </button>
+                        </Link>
                     </div>
                 </div>
             )}
@@ -215,7 +215,7 @@ export default function MerchantHomePage() {
                 <div className="lg:col-span-8 bg-white border border-slate-200/60 rounded-3xl p-6 shadow-sm space-y-6">
                     <div className="flex justify-between items-center border-b border-slate-100 pb-4">
                         <h3 className="text-base font-black text-slate-900">Dernières Commandes</h3>
-                        <button className="text-xs font-bold text-primary hover:underline cursor-pointer">Voir tout</button>
+                        <Link href="/commandes"  className="text-xs font-bold text-primary hover:underline cursor-pointer">Voir tout</Link>
                     </div>
 
                     {recentOrders.length > 0 ? (
