@@ -24,7 +24,7 @@ const DEFAULT_POSTS: BlogPost[] = [
         title: "5 stratégies infaillibles pour convertir vos abonnés Instagram en clients fidèles",
         slug: "5-strategies-instagram-clients-fideles",
         category: "Conseils",
-        summary: "Apprenez à utiliser les stories, les messages directs et la vitrine FastStore pour créer un tunnel de vente fluide et naturel sur les réseaux sociaux. Découvrez des exemples concrets pour...",
+        summary: "Apprenez à utiliser les stories, les messages directs et la vitrine LinkBoutik pour créer un tunnel de vente fluide et naturel sur les réseaux sociaux. Découvrez des exemples concrets pour...",
         content: "",
         cover_image_url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80",
         is_featured: true,
@@ -45,7 +45,7 @@ const DEFAULT_POSTS: BlogPost[] = [
         title: "L'histoire de Sarah : de 0 à 1000 commandes...",
         slug: "histoire-de-sarah-1000-commandes",
         category: "Success Stories",
-        summary: "Découvrez le parcours inspirant d'une créatrice de bijoux qui a structuré ses ventes avec FastStore.",
+        summary: "Découvrez le parcours inspirant d'une créatrice de bijoux qui a structuré ses ventes avec LinkBoutik.",
         content: "",
         cover_image_url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=500&q=80",
         published_at: "05 Oct 2024"
@@ -111,7 +111,7 @@ export default function BlogPage() {
                         Ressources & Inspirations
                     </h1>
                     <p className="mt-4 text-sm md:text-base text-slate-500 leading-relaxed">
-                        Découvrez nos conseils, astuces et témoignages pour développer votre activité sur les réseaux sociaux avec FastStore.
+                        Découvrez nos conseils, astuces et témoignages pour développer votre activité sur les réseaux sociaux avec LinkBoutik.
                     </p>
                 </div>
 

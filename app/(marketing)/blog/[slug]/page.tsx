@@ -26,7 +26,7 @@ const LOCAL_ARTICLES_DB: Record<string, BlogPost> = {
         title: "5 stratégies infaillibles pour convertir vos abonnés Instagram en clients fidèles",
         slug: "5-strategies-instagram-clients-fideles",
         category: "Conseils",
-        summary: "Apprenez à utiliser les stories, les messages directs et la vitrine FastStore pour créer un tunnel de vente fluide et naturel sur les réseaux sociaux.",
+        summary: "Apprenez à utiliser les stories, les messages directs et la vitrine LinkBoutik pour créer un tunnel de vente fluide et naturel sur les réseaux sociaux.",
         cover_image_url: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80",
         published_at: "12 Octobre 2024",
         reading_time: "5 min de lecture",
@@ -34,16 +34,16 @@ const LOCAL_ARTICLES_DB: Record<string, BlogPost> = {
       <p>Aujourd'hui, posséder des milliers d'abonnés sur Instagram ne garantit plus automatiquement des ventes. L'algorithme change, la concurrence s'accroît et l'attention des utilisateurs diminue. Pour transformer vos abonnés passifs en acheteurs fidèles et réguliers, vous devez structurer votre démarche.</p>
       
       <h3>1. Optimisez votre biographie pour la conversion</h3>
-      <p>Votre biographie est votre carte de visite numérique. Elle doit expliquer clairement ce que vous vendez, à qui vous vous adressez, et surtout proposer un appel à l'action précis vers votre catalogue. Remplacez votre lien générique par votre lien unique de boutique FastStore (ex: <em>faststore.ci/votre-boutique</em>).</p>
+      <p>Votre biographie est votre carte de visite numérique. Elle doit expliquer clairement ce que vous vendez, à qui vous vous adressez, et surtout proposer un appel à l'action précis vers votre catalogue. Remplacez votre lien générique par votre lien unique de boutique LinkBoutik (ex: <em>linkboutik.ci/votre-boutique</em>).</p>
       
       <h3>2. Utilisez les Stories pour créer de l'urgence</h3>
-      <p>Les Stories sont l'outil parfait pour stimuler l'achat impulsif. Présentez régulièrement vos produits en situation réelle. Utilisez le sticker de lien pour rediriger directement vos clients sur la fiche produit de votre catalogue FastStore en précisant que le stock est limité.</p>
+      <p>Les Stories sont l'outil parfait pour stimuler l'achat impulsif. Présentez régulièrement vos produits en situation réelle. Utilisez le sticker de lien pour rediriger directement vos clients sur la fiche produit de votre catalogue LinkBoutik en précisant que le stock est limité.</p>
       
       <h3>3. Automatisez vos réponses aux prix</h3>
-      <p>C'est l'erreur la plus fréquente : répondre "Prix en DM" ou passer des heures à écrire le tarif sous chaque commentaire. En affichant vos prix de manière transparente sur votre catalogue en ligne FastStore, vous qualifiez vos clients. Ceux qui vous contactent sont déjà d'accord sur le prix et prêts à valider.</p>
+      <p>C'est l'erreur la plus fréquente : répondre "Prix en DM" ou passer des heures à écrire le tarif sous chaque commentaire. En affichant vos prix de manière transparente sur votre catalogue en ligne LinkBoutik, vous qualifiez vos clients. Ceux qui vous contactent sont déjà d'accord sur le prix et prêts à valider.</p>
 
       <h3>4. Offrez une expérience d'achat fluide via WhatsApp</h3>
-      <p>L'acheteur mobile en Afrique de l'Ouest et Centrale veut de la rapidité et du contact humain. Grâce à notre intégration, vos clients remplissent leur panier sur votre boutique FastStore et sont redirigés sur votre WhatsApp en un clic avec un récapitulatif pré-rempli. Vous n'avez plus qu'à convenir de l'heure de livraison.</p>
+      <p>L'acheteur mobile en Afrique de l'Ouest et Centrale veut de la rapidité et du contact humain. Grâce à notre intégration, vos clients remplissent leur panier sur votre boutique LinkBoutik et sont redirigés sur votre WhatsApp en un clic avec un récapitulatif pré-rempli. Vous n'avez plus qu'à convenir de l'heure de livraison.</p>
 
       <h3>5. Créez un programme de fidélisation simple</h3>
       <p>Conserver un client existant coûte 5 fois moins cher que d'en acquérir un nouveau. Utilisez notre CRM pour identifier vos meilleurs clients et envoyez-leur un code promo exclusif (ex: SOLDES10) par message de remerciement après leur achat.</p>
@@ -65,7 +65,7 @@ const LOCAL_ARTICLES_DB: Record<string, BlogPost> = {
       <p>Lorsque vous publiez un produit sur Facebook, Instagram et WhatsApp en même temps, les commandes peuvent affluer de toutes parts. Sans outil centralisé, il est presque impossible de savoir en temps réel s'il vous reste 2 ou 0 robes rouges en taille M.</p>
       
       <h3>Centralisez votre inventaire</h3>
-      <p>La solution consiste à utiliser une plateforme centrale de gestion. Lorsque vous enregistrez vos produits sur FastStore, vous pouvez définir la quantité exacte disponible pour chaque article. Le système décompte automatiquement les pièces vendues et empêche les clients d'acheter un produit en rupture de stock.</p>
+      <p>La solution consiste à utiliser une plateforme centrale de gestion. Lorsque vous enregistrez vos produits sur LinkBoutik, vous pouvez définir la quantité exacte disponible pour chaque article. Le système décompte automatiquement les pièces vendues et empêche les clients d'acheter un produit en rupture de stock.</p>
     `
     },
     "histoire-de-sarah-1000-commandes": {
@@ -73,7 +73,7 @@ const LOCAL_ARTICLES_DB: Record<string, BlogPost> = {
         title: "L'histoire de Sarah : de 0 à 1000 commandes grâce à sa boutique automatisée",
         slug: "histoire-de-sarah-1000-commandes",
         category: "Success Stories",
-        summary: "Découvrez le parcours inspirant d'une créatrice de bijoux qui a structuré ses ventes avec FastStore.",
+        summary: "Découvrez le parcours inspirant d'une créatrice de bijoux qui a structuré ses ventes avec LinkBoutik.",
         cover_image_url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=1200&q=80",
         published_at: "05 Octobre 2024",
         reading_time: "6 min de lecture",
@@ -83,12 +83,12 @@ const LOCAL_ARTICLES_DB: Record<string, BlogPost> = {
       <blockquote>"Je passais 8 heures par jour sur mon téléphone à donner mes tarifs et mes frais de livraison. Aujourd'hui, ma boutique en ligne fait tout le travail pendant que je me concentre sur la création."</blockquote>
       
       <h3>L'élément déclencheur : l'automatisation</h3>
-      <p>Sarah explique qu'elle perdait de nombreux clients car elle mettait parfois plusieurs heures à répondre aux messages d'intérêt sur Instagram. En installant son lien FastStore dans sa bio, ses abonnés ont pu commencer à commander en autonomie totale, même au milieu de la nuit.</p>
+      <p>Sarah explique qu'elle perdait de nombreux clients car elle mettait parfois plusieurs heures à répondre aux messages d'intérêt sur Instagram. En installant son lien LinkBoutik dans sa bio, ses abonnés ont pu commencer à commander en autonomie totale, même au milieu de la nuit.</p>
     `
     },
     "nouveau-acceptez-les-paiements-mobile-money": {
         id: "post-3",
-        title: "Nouveau : Acceptez les paiements Mobile Money en ligne sur FastStore",
+        title: "Nouveau : Acceptez les paiements Mobile Money en ligne sur LinkBoutik",
         slug: "nouveau-acceptez-les-paiements-mobile-money",
         category: "Mises à jour",
         summary: "Nous avons intégré de nouvelles solutions de paiement pour simplifier la vie de vos clients et sécuriser vos revenus.",
@@ -96,7 +96,7 @@ const LOCAL_ARTICLES_DB: Record<string, BlogPost> = {
         published_at: "01 Octobre 2024",
         reading_time: "3 min de lecture",
         content: `
-      <p>Nous sommes fiers de vous annoncer le déploiement d'une mise à jour majeure très attendue : l'intégration des paiements en ligne par Mobile Money (Wave, Orange Money, MTN, Moov) directement sur vos vitrines FastStore.</p>
+      <p>Nous sommes fiers de vous annoncer le déploiement d'une mise à jour majeure très attendue : l'intégration des paiements en ligne par Mobile Money (Wave, Orange Money, MTN, Moov) directement sur vos vitrines LinkBoutik.</p>
       
       <h3>Sécurisez vos acomptes et évitez les faux bonds</h3>
       <p>La livraison contre remboursement comporte des risques élevés de refus de livraison ou de clients absents. Avec notre nouveau système de paiement, vous pouvez désormais configurer un paiement complet ou un acompte en ligne obligatoire au moment de l'achat pour couvrir les frais de livraison.</p>

@@ -62,7 +62,7 @@ export default function MerchantCatalogPage() {
     const getProductPreviewUrl = (productSlug: string) => {
         if (typeof window === "undefined" || !shop) return "#";
 
-        const hostname = window.location.hostname; // ex: "marchand.localhost" ou "marchand.faststore.africa"
+        const hostname = window.location.hostname; // ex: "marchand.localhost" ou "marchand.linkboutik.com"
         const protocol = window.location.protocol; // "http:" ou "https:"
         const port = window.location.port ? `:${window.location.port}` : ""; // ":3000" en local, vide en prod
 
@@ -75,8 +75,8 @@ export default function MerchantCatalogPage() {
             return `${protocol}//${shopSlug}.localhost${port}/${productSlug}`;
         }
 
-        // 2. Gestion pour la Production (ex: marchand.faststore.africa -> maboutique.faststore.africa)
-        const mainDomain = hostname.replace("marchand.", ""); // Extrait le domaine racine "faststore.africa"
+        // 2. Gestion pour la Production (ex: marchand.linkboutik.com -> maboutique.linkboutik.com)
+        const mainDomain = hostname.replace("marchand.", ""); // Extrait le domaine racine "linkboutik.com"
         return `${protocol}//${shopSlug}.${mainDomain}/${productSlug}`;
     };
 

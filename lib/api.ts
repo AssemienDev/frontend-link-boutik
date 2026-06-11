@@ -24,14 +24,14 @@ export async function apiFetch<T>(endpoint: string, options: RequestOptions = {}
 
         // 1. Détection de l'espace d'administration Super Admin
         if (hostname.startsWith("admin.")) {
-            const adminToken = localStorage.getItem("faststore_admin_token");
+            const adminToken = localStorage.getItem("linkboutik_admin_token");
             if (adminToken) {
                 defaultHeaders["Authorization"] = `Bearer ${adminToken}`;
             }
         }
         // 2. Détection de l'espace Marchand
         else if (hostname.startsWith("marchand.")) {
-            const merchantToken = localStorage.getItem("faststore_merchant_token");
+            const merchantToken = localStorage.getItem("linkboutik_merchant_token");
             if (merchantToken) {
                 defaultHeaders["Authorization"] = `Bearer ${merchantToken}`;
             }

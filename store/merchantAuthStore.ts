@@ -50,7 +50,7 @@ export const useMerchantAuthStore = create<MerchantAuthState>()(
             setCredentials: (merchant, token) => {
                 set({ merchant, token, isAuthenticated: true });
                 if (typeof window !== "undefined") {
-                    localStorage.setItem("faststore_merchant_token", token);
+                    localStorage.setItem("linkboutik_merchant_token", token);
                 }
             },
 
@@ -61,7 +61,7 @@ export const useMerchantAuthStore = create<MerchantAuthState>()(
             clearCredentials: () => {
                 set({ merchant: null, token: null, isAuthenticated: false });
                 if (typeof window !== "undefined") {
-                    localStorage.removeItem("faststore_merchant_token");
+                    localStorage.removeItem("linkboutik_merchant_token");
                 }
             },
 
@@ -72,7 +72,7 @@ export const useMerchantAuthStore = create<MerchantAuthState>()(
             },
         }),
         {
-            name: "faststore_merchant_auth_storage", // Clé d'isolation LocalStorage
+            name: "linkboutik_merchant_auth_storage", // Clé d'isolation LocalStorage
             storage: createJSONStorage(() => localStorage),
         }
     )

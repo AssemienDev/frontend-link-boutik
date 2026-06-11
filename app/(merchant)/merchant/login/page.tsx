@@ -72,7 +72,7 @@ export default function MerchantLoginPage() {
                         Bienvenue
                     </h1>
                     <p className="text-sm text-slate-600 mt-2 font-medium">
-                        Connectez-vous à FastStore pour gérer votre boutique.
+                        Connectez-vous à LinkBoutik pour gérer votre boutique.
                     </p>
                 </div>
 

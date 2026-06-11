@@ -10,7 +10,7 @@ import {
     Users,
     Wallet,
     Rocket,
-    X, MoveRight, Check
+    X, MoveRight, Check, Star
 } from "lucide-react";
 import {Plan} from "@/interfaces/Plan";
 
@@ -53,7 +53,7 @@ export default function MarketingLandingPage() {
                     Arrêtez de répondre &ldquo;Quel est le prix ?&rdquo; toute la journée.
                 </h1>
                 <p className="mt-6 text-sm md:text-base text-slate-600 max-w-2xl leading-relaxed">
-                    FastStore aide les commerçants qui vendent sur Facebook, Instagram, TikTok et WhatsApp à centraliser leurs ventes, leurs commandes et leurs clients sur une seule plateforme.
+                    LinkBoutik aide les commerçants qui vendent sur Facebook, Instagram, TikTok et WhatsApp à centraliser leurs ventes, leurs commandes et leurs clients sur une seule plateforme.
                 </p>
                 <p className="mt-4 text-xs md:text-sm text-slate-500 max-w-xl">
                     Créez votre boutique en ligne en quelques minutes et laissez vos clients consulter vos produits, passer commande et vous contacter directement sur WhatsApp.
@@ -69,9 +69,11 @@ export default function MarketingLandingPage() {
                 {/* Note étoiles */}
                 <div className="mt-6 flex items-center gap-2">
                     <div className="flex gap-0.5 text-secondary">
-                        {"★".repeat(5)}
+                        {Array.from({ length: 5 }).map((_, i) => (
+                            <Star key={i} size={17} className="text-yellow-500 fill-yellow-500" />
+                        ))}
                     </div>
-                    <span className="text-xs font-bold text-slate-500">+500 commerçants déjà inscrits</span>
+                    <span className="text-xs font-bold text-slate-500">+200 commerçants déjà inscrits</span>
                 </div>
             </section>
 
@@ -103,7 +105,7 @@ export default function MarketingLandingPage() {
             {/* 3. SECTION AUTOMATISATION FLOW */}
             <section className="py-16 max-w-xl mx-auto px-6 text-center">
                 <h2 className="text-xl md:text-2xl font-black text-third">
-                    FastStore automatise votre commerce.
+                    LinkBoutik automatise votre commerce.
                 </h2>
 
                 <div className="mt-8 p-6 bg-primary/5 border border-primary/10 rounded-2xl flex items-center justify-around gap-2 text-[10px] md:text-xs font-bold text-primary">
@@ -113,7 +115,7 @@ export default function MarketingLandingPage() {
                         ))}
                     </div>
                     <MoveRight className="text-slate-400"/>
-                    <span className="px-4 py-2.5 rounded-lg bg-third text-white font-extrabold">FastStore</span>
+                    <span className="px-4 py-2.5 rounded-lg bg-third text-white font-extrabold">LinkBoutik</span>
                     <MoveRight className="text-slate-400"/>
                     <span className="font-extrabold text-primary">Commandes + Clients</span>
                 </div>
@@ -396,7 +398,7 @@ export default function MarketingLandingPage() {
 
                 <div className="mt-10 space-y-3">
                     {[
-                        { q: "Dois-je savoir coder ?", a: "Non, absolument pas. FastStore est conçu pour être aussi simple d'utilisation qu'une application de messagerie. Vous importez vos photos et prix en quelques clics." },
+                        { q: "Dois-je savoir coder ?", a: "Non, absolument pas. LinkBoutik est conçu pour être aussi simple d'utilisation qu'une application de messagerie. Vous importez vos photos et prix en quelques clics." },
                         { q: "Puis-je utiliser WhatsApp ?", a: "Oui, la plateforme intègre un bouton d'achat direct redirigeant vos clients sur votre WhatsApp avec la commande pré-remplie." },
                         { q: "Paiements Mobile Money ?", a: "Oui, nous supportons tous les grands opérateurs d'Afrique de l'Ouest et Centrale (Wave, MTN, Orange, Moov) pour recevoir vos acomptes en ligne." }
                     ].map((item, idx) => (

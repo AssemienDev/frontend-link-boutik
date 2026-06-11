@@ -43,7 +43,7 @@ export default function MerchantForgotPasswordPage() {
                 {/* LOGO PLATEFORME */}
                 <div className="text-center mb-6">
           <span className="text-2xl font-black text-primary tracking-tight">
-            FastStore
+            LinkBoutik
           </span>
                 </div>
 

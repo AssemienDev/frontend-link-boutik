@@ -37,7 +37,7 @@ export default function PrivacyPolicyPage() {
                         Politique de confidentialité
                     </h1>
                     <p className="mt-6 text-sm md:text-base text-slate-800 leading-relaxed">
-                        Chez FastStore, nous accordons une importance primordiale à la protection de vos données. Cette politique explique de manière transparente comment nous collectons, utilisons et protégeons vos informations.
+                        Chez LinkBoutik, nous accordons une importance primordiale à la protection de vos données. Cette politique explique de manière transparente comment nous collectons, utilisons et protégeons vos informations.
                     </p>
                 </div>
 
@@ -175,7 +175,7 @@ export default function PrivacyPolicyPage() {
                                 La sécurité de vos données financières et personnelles est notre priorité. Nous utilisons des protocoles de chiffrement standards de l'industrie pour protéger vos informations lors des transferts et au repos.
                             </p>
                             <p className="text-xs md:text-sm text-slate-500 leading-relaxed">
-                                L&#39;accès à vos données est strictement limité aux employés de FastStore qui en ont besoin pour accomplir leurs tâches. Nous ne vendons <strong>jamais</strong> vos données à des tiers.
+                                L&#39;accès à vos données est strictement limité aux employés de LinkBoutik qui en ont besoin pour accomplir leurs tâches. Nous ne vendons <strong>jamais</strong> vos données à des tiers.
                             </p>
 
                             <Link
@@ -200,7 +200,7 @@ export default function PrivacyPolicyPage() {
                                 </h2>
                             </div>
                             <p className="text-xs md:text-sm text-slate-500 leading-relaxed">
-                                FastStore utilise des cookies essentiels pour maintenir votre session active et sécuriser votre compte. Nous utilisons également des cookies analytiques anonymisés pour comprendre comment nos marchands utilisent l'application et améliorer notre interface mobile.
+                                LinkBoutik utilise des cookies essentiels pour maintenir votre session active et sécuriser votre compte. Nous utilisons également des cookies analytiques anonymisés pour comprendre comment nos marchands utilisent l'application et améliorer notre interface mobile.
                             </p>
                         </section>
 

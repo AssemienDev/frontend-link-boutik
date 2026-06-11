@@ -15,7 +15,7 @@ export default function TermsOfServicePage() {
                         Conditions d&#39;utilisation
                     </h1>
                     <p className="mt-6 text-sm md:text-base text-slate-500 leading-relaxed">
-                        Veuillez lire attentivement ces conditions d&#39;utilisation avant d&#39;utiliser la plateforme FastStore. Elles régissent votre accès et votre utilisation de nos services de commerce social.
+                        Veuillez lire attentivement ces conditions d&#39;utilisation avant d&#39;utiliser la plateforme LinkBoutik. Elles régissent votre accès et votre utilisation de nos services de commerce social.
                     </p>
                 </div>
 
@@ -33,12 +33,12 @@ export default function TermsOfServicePage() {
                             </h2>
                         </div>
                         <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
-                            Pour utiliser FastStore, vous devez avoir au moins 18 ans et être capable de conclure des contrats juridiquement contraignants selon le droit applicable dans votre juridiction.
+                            Pour utiliser LinkBoutik, vous devez avoir au moins 18 ans et être capable de conclure des contrats juridiquement contraignants selon le droit applicable dans votre juridiction.
                         </p>
                         <ul className="pl-4 border-l-2 border-slate-100 space-y-2.5 text-xs text-slate-500 font-medium">
                             <li>• Vous devez fournir des informations exactes lors de votre inscription.</li>
                             <li>• Vous êtes responsable du maintien de la confidentialité de votre compte.</li>
-                            <li>• L&#39;utilisation de FastStore pour des activités illégales est strictement interdite.</li>
+                            <li>• L&#39;utilisation de LinkBoutik pour des activités illégales est strictement interdite.</li>
                         </ul>
                     </div>
 
@@ -53,7 +53,7 @@ export default function TermsOfServicePage() {
                             </h2>
                         </div>
                         <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
-                            FastStore facture des frais de transaction sur les ventes réalisées via la plateforme. Les détails de ces frais sont clairement indiqués dans votre tableau de bord marchand.
+                            LinkBoutik facture des frais de transaction sur les ventes réalisées via la plateforme. Les détails de ces frais sont clairement indiqués dans votre tableau de bord marchand.
                         </p>
                         <p className="text-xs md:text-sm text-slate-500 leading-relaxed italic">
                             Nous nous réservons le droit de modifier nos tarifs avec un préavis de 30 jours. Les frais actuels sont automatiquement déduits avant les reversements sur votre compte bancaire ou mobile money.
@@ -71,7 +71,7 @@ export default function TermsOfServicePage() {
                             </h2>
                         </div>
                         <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
-                            En tant que marchand sur FastStore, vous êtes seul responsable de l&#39;inventaire, de l&#39;expédition et du service client lié à vos produits.
+                            En tant que marchand sur LinkBoutik, vous êtes seul responsable de l&#39;inventaire, de l&#39;expédition et du service client lié à vos produits.
                         </p>
                         <ul className="pl-4 border-l-2 border-slate-100 space-y-2.5 text-xs text-slate-500 font-medium">
                             <li>• Les descriptions de produits doivent être honnêtes et précises.</li>
@@ -92,7 +92,7 @@ export default function TermsOfServicePage() {
                             </h2>
                         </div>
                         <p className="text-xs md:text-sm text-slate-600 leading-relaxed">
-                            Vous pouvez fermer votre compte FastStore à tout moment. FastStore se réserve également le droit de suspendre ou de fermer votre compte en cas de violation de ces conditions.
+                            Vous pouvez fermer votre compte LinkBoutik à tout moment. LinkBoutik se réserve également le droit de suspendre ou de fermer votre compte en cas de violation de ces conditions.
                         </p>
                         <p className="text-xs md:text-sm text-slate-500 leading-relaxed italic">
                             En cas de résiliation, les fonds en attente seront versés selon le calendrier habituel, moins les éventuels remboursements ou frais impayés. Les données de votre boutique pourront être définitivement supprimées après 90 jours.
@@ -105,10 +105,10 @@ export default function TermsOfServicePage() {
                 <div className="mt-12 p-6 rounded-2xl bg-slate-150/40 border border-slate-200 text-center text-xs md:text-sm text-slate-500">
                     Pour toute question concernant ces conditions, veuillez contacter{" "}
                     <a
-                        href="mailto:support@faststore.africa"
+                        href="mailto:support@linkboutik.com"
                         className="text-primary font-bold hover:underline"
                     >
-                        support@faststore.africa
+                        support@linkboutik.com
                     </a>.
                 </div>
 

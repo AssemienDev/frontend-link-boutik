@@ -6,25 +6,25 @@ import {Metadata} from "next";
 
 export const metadata: Metadata = {
     title: {
-        default: "FastStore Commerce Cloud ",
-        template: "%s | FastStore", // Gabarit dynamique : injecte le titre de la page active à la place de %s
+        default: "LinkBoutik",
+        template: "%s | LinkBoutik", // Gabarit dynamique : injecte le titre de la page active à la place de %s
     },
-    description: "FastStore centralise vos ventes, fiches produits et commandes sur les réseaux sociaux (Facebook, Instagram, TikTok) et WhatsApp en Afrique.",
+    description: "LinkBoutik centralise vos ventes, fiches produits et commandes sur les réseaux sociaux (Facebook, Instagram, TikTok) et WhatsApp en Afrique.",
     keywords: ["E-commerce", "SaaS", "WhatsApp", "Afrique", "Vente en ligne", "Boutique en ligne", "Mobile Money", "Côte d'Ivoire", "Sénégal"],
-    authors: [{ name: "FastStore Team" }],
+    authors: [{ name: "LinkBoutik Team" }],
 
     // Balises OpenGraph (Optimisation du partage de liens sur WhatsApp, Facebook, LinkedIn)
     openGraph: {
-        title: "FastStore Commerce Cloud",
+        title: "LinkBoutik",
         description: "Vendez facilement sur WhatsApp et les réseaux sociaux grâce à votre catalogue automatisé.",
-        url: "https://faststore.com",
-        siteName: "FastStore",
+        url: "https://linkboutik.com",
+        siteName: "LinkBoutik",
         locale: "fr_FR",
         type: "website",
     },
     twitter: {
         card: "summary_large_image",
-        title: "FastStore Commerce Cloud",
+        title: "LinkBoutik Commerce Cloud",
         description: "Votre boutique en ligne configurée en moins de 10 minutes.",
     },
 };

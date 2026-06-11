@@ -197,10 +197,10 @@ export default function ContactPage() {
                                 <div>
                                     <h4 className="font-black text-slate-800 text-sm md:text-base">Email Support</h4>
                                     <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-                                        support@faststore.com
+                                        support@linkboutik.com
                                     </p>
                                     <a
-                                        href="mailto:support@faststore.com"
+                                        href="mailto:support@linkboutik.com"
                                         className="mt-3 text-xs font-bold text-primary hover:underline inline-flex items-center gap-1"
                                     >
                                         Nous écrire →

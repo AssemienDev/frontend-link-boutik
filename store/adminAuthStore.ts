@@ -31,14 +31,14 @@ export const useAdminAuthStore = create<AdminAuthState>()(
             setAdminCredentials: (admin, token) => {
                 set({ admin, token, isAdminAuthenticated: true });
                 if (typeof window !== "undefined") {
-                    localStorage.setItem("faststore_admin_token", token);
+                    localStorage.setItem("linkboutik_admin_token", token);
                 }
             },
 
             clearAdminCredentials: () => {
                 set({ admin: null, token: null, isAdminAuthenticated: false });
                 if (typeof window !== "undefined") {
-                    localStorage.removeItem("faststore_admin_token");
+                    localStorage.removeItem("linkboutik_admin_token");
                 }
             },
 
@@ -49,7 +49,7 @@ export const useAdminAuthStore = create<AdminAuthState>()(
             },
         }),
         {
-            name: "faststore_admin_auth_storage", // Clé d'isolation LocalStorage
+            name: "linkboutik_admin_auth_storage", // Clé d'isolation LocalStorage
             storage: createJSONStorage(() => localStorage),
         }
     )

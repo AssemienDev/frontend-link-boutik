@@ -62,7 +62,7 @@ export default function MerchantMarketingPage() {
 
     // 4. PARTAGER SUR WHATSAPP
     const handleShareWhatsApp = () => {
-        const message = encodeURIComponent(`Découvrez ma boutique en ligne sur FastStore ! Voici le lien pour commander : ${shopUrl}`);
+        const message = encodeURIComponent(`Découvrez ma boutique en ligne sur LinkBoutik ! Voici le lien pour commander : ${shopUrl}`);
         window.open(`https://wa.me/?text=${message}`, "_blank");
     };
 

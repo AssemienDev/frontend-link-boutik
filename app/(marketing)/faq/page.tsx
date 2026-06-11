@@ -36,7 +36,7 @@ const DEFAULT_FAQS: FAQItem[] = [
         id: "default-4",
         category: "WhatsApp",
         question: "Comment fonctionne l'intégration WhatsApp ?",
-        answer: "Dès que l'acheteur valide son panier d'achat sur votre catalogue, FastStore génère un lien sécurisé et redirige automatiquement le client vers votre numéro de discussion WhatsApp professionnelle avec un message pré-rempli contenant le récapitulatif propre des articles, du total et de ses coordonnées."
+        answer: "Dès que l'acheteur valide son panier d'achat sur votre catalogue, LinkBoutik génère un lien sécurisé et redirige automatiquement le client vers votre numéro de discussion WhatsApp professionnelle avec un message pré-rempli contenant le récapitulatif propre des articles, du total et de ses coordonnées."
     }
 ];
 

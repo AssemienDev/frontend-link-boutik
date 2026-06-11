@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import {apiFetch} from "@/lib/api";
+import Image from "next/image";
 
 
 export default function MerchantLayout({
@@ -31,7 +32,7 @@ export default function MerchantLayout({
 
     useEffect(() => {
         setMounted(true);
-        document.title = "FastStore - Espace Marchand";
+        document.title = "LinkBoutik - Espace Marchand";
     }, []);
 
     useEffect(() => {
@@ -122,9 +123,15 @@ export default function MerchantLayout({
                         </div>
                     </div>
 
-                    {/* Logo FastStore */}
+                    {/* Logo LinkBoutik */}
                     <div className="flex items-center gap-2">
-                        <span className="text-xl font-black text-primary tracking-tight">FastStore</span>
+                        <Image
+                            src="/logo2.png"
+                            alt="LinkBoutik"
+                            width={150}
+                            height={116}
+                            priority
+                        />
                     </div>
 
                     {/* ACTIONS : CLOCHE, PROFIL CLIQUABLE & DECONNEXION */}
@@ -283,6 +290,16 @@ export default function MerchantLayout({
                                 }`}
                             >
                                 <Settings className="w-4 h-4 text-slate-400" /> Paramètre boutique
+                            </Link>
+                            <Link
+                                href="/support"
+                                className={`flex items-center gap-3 px-4 py-3.5 rounded-xl transition ${
+                                    pathname.startsWith("/support")
+                                        ? "bg-third text-white shadow-sm"
+                                        : "hover:bg-slate-50 hover:text-slate-800"
+                                }`}
+                            >
+                                <Settings className="w-4 h-4 text-slate-400" /> Service Assistance
                             </Link>
 
                         </nav>

@@ -10,14 +10,14 @@ export default function Footer() {
 
                 {/* LOGO */}
                 <div className="flex items-center">
-          <span className="text-xl font-extrabold text-[#005F56] tracking-tight">
-            FastStore
-          </span>
+                  <span className="text-xl font-extrabold text-[#005F56] tracking-tight">
+                    LinkBoutik
+                  </span>
                 </div>
 
                 {/* COPYRIGHT */}
                 <div className="text-slate-500 text-xs text-center">
-                    &copy; {currentYear} FastStore Commerce Cloud. All rights reserved.
+                    &copy; {currentYear} LinkBoutik Commerce Cloud. All rights reserved.
                 </div>
 
                 {/* LIENS DE LÉGISLATION */}

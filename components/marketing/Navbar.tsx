@@ -4,6 +4,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 
 export default function Navbar() {
@@ -38,9 +39,13 @@ export default function Navbar() {
                     </button>
 
                     <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl font-extrabold text-[#005F56] tracking-tight">
-              FastStore
-            </span>
+                        <Image
+                            src="/logo1.png"
+                            alt="LinkBoutik"
+                            width={110}
+                            height={106}
+                            priority
+                        />
                     </Link>
                 </div>
 

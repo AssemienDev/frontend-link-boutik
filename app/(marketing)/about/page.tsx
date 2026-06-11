@@ -19,7 +19,7 @@ export default function AboutPage() {
                         en Afrique, simplement.
                     </h1>
                     <p className="text-sm md:text-base text-slate-600 leading-relaxed max-w-2xl">
-                        Nous croyons que chaque commerçant mérite des outils puissants et accessibles. FastStore est conçu pour transformer votre smartphone en un centre de gestion complet, stimulant votre croissance et connectant vos produits au monde.
+                        Nous croyons que chaque commerçant mérite des outils puissants et accessibles. LinkBoutik est conçu pour transformer votre smartphone en un centre de gestion complet, stimulant votre croissance et connectant vos produits au monde.
                     </p>
                     <div className="pt-4">
                         <a
@@ -50,7 +50,7 @@ export default function AboutPage() {
                         Nos Valeurs Fondamentales
                     </h2>
                     <p className="mt-4 text-xs md:text-sm text-slate-500 max-w-xl mx-auto">
-                        Les principes qui guident la conception de chaque fonctionnalité de FastStore.
+                        Les principes qui guident la conception de chaque fonctionnalité de LinkBoutik.
                     </p>
 
                     <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">

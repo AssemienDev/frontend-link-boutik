@@ -105,7 +105,7 @@ export default function MerchantOrdersPage() {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/merchant/orders/export`, {
                 headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("faststore_merchant_token")}`
+                    "Authorization": `Bearer ${localStorage.getItem("linkboutik_merchant_token")}`
                 }
             });
 
